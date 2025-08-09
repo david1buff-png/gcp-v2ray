@@ -14,8 +14,17 @@
       },
       "streamSettings": {
         "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "yt3.ggpht.com",
+          "alpn": ["http/1.1"],
+          "allowInsecure": true
+        },
         "wsSettings": {
-          "path": "/ABDELHAK_TECH_2"
+          "path": "/ABDELHAK_TECH_2",
+          "headers": {
+            "Host": "yt3.ggpht.com"
+          }
         }
       }
     }
