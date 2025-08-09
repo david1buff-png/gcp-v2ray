@@ -1,38 +1,51 @@
 {
+  "log": {
+    "loglevel": "warning"
+  },
   "inbounds": [
     {
       "port": 8080,
+      "listen": "0.0.0.0",
       "protocol": "vless",
       "settings": {
         "clients": [
           {
             "id": "36459fd0-0c89-4733-b20e-067ffc341bd2",
-            "level": 0
+            "level": 8,
+            "encryption": "none"
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "yt3.ggpht.com",
-          "alpn": ["http/1.1"],
-          "allowInsecure": true
-        },
         "wsSettings": {
-          "path": "/ABDELHAK_TECH_2",
-          "headers": {
-            "Host": "yt3.ggpht.com"
-          }
+          "path": "/ABDELHAK_TECH_2"
         }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
       }
     }
   ],
   "outbounds": [
     {
       "protocol": "freedom",
-      "settings": {}
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
     }
-  ]
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "protocol": ["bittorrent"],
+        "outboundTag": "block"
+      }
+    ]
+  }
 }
