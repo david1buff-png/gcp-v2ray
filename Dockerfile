@@ -1,14 +1,11 @@
-FROM teddysun/v2ray:latest
+# استخدام صورة Xray من teddysun (تدعم VLESS)
+FROM teddysun/xray:latest
 
-# Expose the correct container port (8080)
+# فتح المنفذ 8080 (مطلوب لـ Cloud Run)
 EXPOSE 8080
 
-# Copy the VLESS config into the container
+# نسخ ملف التكوين إلى داخل الحاوية
 COPY config.json /etc/v2ray/config.json
 
-# Run V2Ray with the config file
-CMD ["v2ray", "run", "-config", "/etc/v2ray/config.json"]
-
-
-# join telegram https://t.me/ragnarservers  for new updates 
-# my telegram username is @Not_Ragnar
+# تشغيل خدمة Xray مع ملف التكوين
+CMD ["xray", "run", "-config", "/etc/v2ray/config.json"]
