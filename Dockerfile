@@ -1,11 +1,20 @@
-# استخدام صورة Xray من teddysun (تدعم VLESS)
-FROM teddysun/xray:latest
+FROM alpine:3.18
 
-# فتح المنفذ 8080 (مطلوب لـ Cloud Run)
+RUN apk add --no-cache ca-certificates curl bash unzip
+
+WORKDIR /usr/local/bin
+
+# Download latest Xray
+RUN XVER=$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases/latest | grep -oP '\\"tag_name\\": \\"\\K(.*)(?=\\")') \
+    && ARCH=64 \
+    && URL="https://github.com/XTLS/Xray-core/releases/download/${XVER}/Xray-linux-${ARCH}.zip" \
+    && echo "Downloading Xray ${XVER} from ${URL}" \
+    && curl -L -o /tmp/xray.zip "$URL" \
+    && unzip /tmp/xray.zip -d /usr/local/bin \
+    && rm /tmp/xray.zip
+
+COPY config.json /etc/xray/config.json
+
 EXPOSE 8080
 
-# نسخ ملف التكوين إلى داخل الحاوية
-COPY config.json /etc/v2ray/config.json
-
-# تشغيل خدمة Xray مع ملف التكوين
-CMD ["xray", "run", "-config", "/etc/v2ray/config.json"]
+ENTRYPOINT ["/usr/local/bin/xray", "-config", "/etc/xray/config.json"]
