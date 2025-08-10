@@ -1,8 +1,6 @@
 {
   "log": {
-    "loglevel": "warning",
-    "access": "/var/log/xray/access.log",
-    "error": "/var/log/xray/error.log"
+    "loglevel": "warning"
   },
   "dns": {
     "servers": [
@@ -43,7 +41,7 @@
           {
             "id": "21bf2040-d96f-4903-a075-532c0ce5d1e8",
             "level": 0,
-            "email": "user@xray.com"
+            "email": "user@example.com"
           }
         ],
         "decryption": "none",
@@ -65,7 +63,6 @@
           "earlyDataHeaderName": "Sec-WebSocket-Protocol"
         },
         "sockopt": {
-          "mark": 255,
           "tcpFastOpen": true,
           "tcpKeepAliveIdle": 30,
           "tcpUserTimeout": 10000
@@ -88,13 +85,11 @@
       },
       "streamSettings": {
         "sockopt": {
-          "mark": 255,
           "tcpFastOpen": true,
           "tcpKeepAliveIdle": 30
         }
       }
     },
-
     {
       "tag": "block",
       "protocol": "blackhole",
@@ -132,10 +127,5 @@
       "LoggerService",
       "StatsService"
     ]
-  },
-  "transport": {
-    "wsSettings": {
-      "acceptProxyProtocol": true
-    }
   }
 }
