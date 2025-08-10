@@ -1,0 +1,39 @@
+# Git files
+.gcloudignore
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+docs/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Node modules (if any)
+node_modules/
+
+# Build artifacts
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Temporary files
+tmp/
+temp/
