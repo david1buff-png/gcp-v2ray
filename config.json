@@ -1,5 +1,7 @@
 {
   "log": {
+    "access": "/var/log/xray/access.log",
+    "error": "/var/log/xray/error.log",
     "loglevel": "warning"
   },
   "inbounds": [
@@ -10,9 +12,9 @@
       "settings": {
         "clients": [
           {
-            "id": "36459fd0-0c89-4733-b20e-067ffc341bd2",
-            "level": 8,
-            "encryption": "none"
+            "id": "21bf2040-d96f-4903-a075-532c0ce5d1e8",
+            "level": 0,
+            "email": "user@example.com"
           }
         ],
         "decryption": "none"
@@ -20,7 +22,10 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/ABDELHAK_TECH_2"
+          "path": "/ABDELHAK_TECH_2",
+          "headers": {
+            "Host": "example.com"
+          }
         }
       },
       "sniffing": {
@@ -32,20 +37,7 @@
   "outbounds": [
     {
       "protocol": "freedom",
-      "tag": "direct"
-    },
-    {
-      "protocol": "blackhole",
-      "tag": "block"
+      "settings": {}
     }
-  ],
-  "routing": {
-    "rules": [
-      {
-        "type": "field",
-        "protocol": ["bittorrent"],
-        "outboundTag": "block"
-      }
-    ]
-  }
+  ]
 }
