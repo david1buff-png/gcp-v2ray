@@ -1,4 +1,7 @@
 {
+  "log": {
+    "loglevel": "info"
+  },
   "inbounds": [
     {
       "port": 8080,
@@ -6,16 +9,20 @@
       "settings": {
         "clients": [
           {
-            "id": "36459fd0-0c89-4733-b20e-067ffc341bd2",
-            "level": 0
+            "id": "3b026803-f04d-47ef-aba1-429d637c111e",
+            "flow": ""
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/TG-@Not_Ragnar"
+          "path": "/web_vibe_2",
+          "headers": {
+            "Host": ""
+          }
         }
       }
     }
@@ -23,7 +30,22 @@
   "outbounds": [
     {
       "protocol": "freedom",
-      "settings": {}
+      "settings": {},
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
     }
-  ]
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
 }
