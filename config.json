@@ -1,4 +1,9 @@
 {
+  "log": {
+    "access": "/dev/stdout",
+    "error": "/dev/stderr",
+    "loglevel": "info"
+  },
   "inbounds": [
     {
       "port": 8080,
@@ -6,16 +11,17 @@
       "settings": {
         "clients": [
           {
-            "id": "36459fd0-0c89-4733-b20e-067ffc341bd2",
-            "level": 0
+            "id": "4b5473f7-a232-42e0-8825-0bf43566863d",
+            "flow": ""
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path": "/TG-@Not_Ragnar"
+          "path": "/web_vibe_2"
         }
       }
     }
@@ -23,7 +29,33 @@
   "outbounds": [
     {
       "protocol": "freedom",
+      "tag": "direct",
       "settings": {}
+    },
+    {
+      "protocol": "socks",
+      "tag": "proxy",
+      "settings": {
+        "servers": [
+          {
+            "address": "127.0.0.1",
+            "port": 1080
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "domain": [
+          "yt3.ggpht.com",
+          "googlevideo.com"
+        ]
+      }
+    ]
+  }
 }
